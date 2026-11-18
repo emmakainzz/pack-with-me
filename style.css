@@ -30,7 +30,6 @@ h1 em { color: var(--accent); }
 #trips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 #trips button { display: flex; align-items: center; gap: 13px; text-align: left; min-height: 78px; padding: 12px 15px; background: var(--card); border: 1px solid var(--line); border-radius: 9px; }
 #trips button:hover { border-color: var(--accent); }
-#trips button[aria-pressed="true"] { background: var(--blue); border-color: #6e91a8; box-shadow: inset 0 0 0 1px #6e91a8; }
 .trip-icon { display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid #b1c1ca; border-radius: 50%; color: var(--accent); flex: none; font-size: 1.35rem; }
 #trips strong, #trips small { display: block; }
 #trips small { font-size: .875rem; color: var(--muted); margin-top: 2px; }
@@ -74,4 +73,159 @@ input:checked + span { text-decoration: line-through; color: var(--muted); }
 }
 @media (prefers-reduced-motion: reduce) {
   #fill { transition: none; }
+}
+
+/* Postcards and the editorial spread */
+:root {
+  --paper: #f8f2e7;
+  --card: #fffcf5;
+  --ink: #172a3b;
+  --line: #dcd3c3;
+}
+body { background: radial-gradient(ellipse at 75% 0%, #fffaf0, transparent 65rem); }
+.journal { max-width: 1240px; }
+.wordmark { font-style: italic; }
+.hero { padding-block: clamp(2.1rem, 5vw, 4.5rem) clamp(1.7rem, 4vw, 3.2rem); }
+.postmark { background: transparent; box-shadow: 0 0 0 8px #dce9f185; }
+#trips { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 15px; }
+#trips .destination-card {
+  --postcard-ink: #172a3b;
+  --postcard-paper: #eae0cf;
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-content: end;
+  gap: 3px;
+  min-height: 133px;
+  padding: 16px;
+  color: var(--postcard-ink);
+  background: var(--postcard-paper);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  overflow-wrap: anywhere;
+  box-shadow: 0 3px 7px #3229171a;
+}
+#trips .destination-card::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px solid currentColor;
+  opacity: .28;
+  pointer-events: none;
+}
+#trips .destination-card[data-theme="city"] { --postcard-paper: #192e43; --postcard-ink: #fff7e7; }
+#trips .destination-card[data-theme="coast"] { --postcard-paper: #bed8e5; }
+#trips .destination-card[data-theme="campus"] { --postcard-paper: #d2ddc6; }
+#trips .destination-card:hover { border-color: currentColor; }
+#trips .destination-card[aria-pressed="true"] { outline: 2px solid var(--ink); outline-offset: 3px; }
+#trips .destination-card:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+#trips .trip-icon {
+  width: 29px;
+  height: 29px;
+  margin: 0 0 4px auto;
+  color: inherit;
+  border: 1px dashed currentColor;
+  border-radius: 2px;
+  transform: rotate(7deg);
+}
+#trips strong { font: 400 clamp(1.12rem, 2.1vw, 1.55rem)/1.08 Georgia, serif; }
+#trips small { color: inherit; font-size: .875rem; }
+#trips #create-trip {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 5px;
+  text-align: center;
+  min-height: 133px;
+  border: 1px dashed #7d8e94;
+  border-radius: 4px;
+  background: #fffdf680;
+  font-weight: 650;
+}
+#create-trip span {
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 31px;
+  border: 1px solid #a4b6bf;
+  border-radius: 50%;
+  font: 1.45rem/1 Georgia, serif;
+}
+#trips #create-trip:hover { background: #e2ecf0; }
+.spread { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(18px, 3.2vw, 40px); margin-top: 34px; }
+.packing { min-width: 0; border-radius: 4px; padding: clamp(14px, 2.2vw, 25px); }
+.spread:has(.outfits[hidden]) { grid-template-columns: minmax(0, 650px); }
+.trip-name { overflow-wrap: anywhere; }
+.progress.ready { background: #e2ead8; }
+.progress.ready #hint { color: #294f38; font-weight: 700; }
+.packing-row { display: flex; align-items: center; gap: 5px; border-bottom: 1px solid #eae3d8; }
+.packing-row label { border: 0; flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.item-actions { display: flex; gap: 2px; }
+.item-actions button {
+  background: transparent;
+  border: 0;
+  padding: 4px 5px;
+  min-height: 44px;
+  color: var(--accent);
+  font-size: .875rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.entry-form { display: flex; gap: 8px; margin-bottom: 20px; }
+.entry-form input, #editor-name {
+  min-width: 0;
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid #a7b1b3;
+  border-radius: 4px;
+  background: #fffdfa;
+  color: var(--ink);
+  padding: 8px 11px;
+}
+.primary, #editor-cancel {
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.primary { background: var(--ink); color: #fffaf0; }
+.primary:hover { background: #34546b; }
+#editor-cancel { background: transparent; }
+#empty-list { color: var(--muted); }
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+#editor {
+  width: min(430px, calc(100% - 32px));
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--card);
+  color: var(--ink);
+}
+#editor::backdrop { background: #14243490; }
+#editor h2 { font-size: 1.9rem; margin-bottom: 15px; }
+#editor label { border: 0; min-height: 0; margin-bottom: 5px; }
+.editor-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 15px; flex-wrap: wrap; }
+.outfits { min-width: 0; }
+.outfits h2 { margin: 0 0 12px; padding-bottom: 9px; border-bottom: 1px solid var(--ink); }
+#looks { gap: 20px; }
+.look { border-radius: 2px; padding: 8px 8px 0; }
+.look-copy { padding: 14px 10px 16px; }
+.look-copy h3 { font-size: clamp(1.45rem, 3vw, 2rem); letter-spacing: -.035em; }
+.look-copy .look-time { letter-spacing: .11em; text-transform: uppercase; }
+.look-copy p { line-height: 1.45; }
+@media (max-width: 850px) {
+  #trips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .spread { grid-template-columns: minmax(0, 1fr); margin-top: 24px; }
+  #trips { gap: 11px; }
+  #trips .destination-card, #trips #create-trip { min-height: 116px; padding: 12px; }
 }
