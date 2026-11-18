@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A little travel journal with packing checklists and outfit ideas for your next getaway.">
+  <title>Pack With Me</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="journal">
+    <header class="masthead">
+      <div class="wordmark"><span aria-hidden="true">✦</span> The Packing Journal</div>
+    </header>
+    <section class="hero" aria-labelledby="title">
+      <div>
+        <h1 id="title">Pack <em>With Me.</em></h1>
+        <p>A little planning for wherever you’re headed.</p>
+      </div>
+      <div class="postmark" aria-hidden="true"><span>✈</span></div>
+    </section>
+    <section class="destinations" aria-labelledby="trip-label">
+      <h2 id="trip-label">Where are we going?</h2>
+      <div id="trips" role="group" aria-labelledby="trip-label"></div>
+    </section>
+    <div class="spread">
+      <section class="packing panel" aria-labelledby="packing-title">
+        <div class="section-heading">
+          <h2 id="packing-title">Packing Checklist</h2>
+          <span id="trip-name" class="trip-name"></span>
+        </div>
+        <div class="progress">
+          <div class="suitcase" aria-hidden="true"><div id="fill"></div><i></i><i></i></div>
+          <div><strong id="count" role="status"></strong><p id="hint"></p></div>
+        </div>
+        <div id="checklist"></div>
+        <button id="reset" type="button">↻ &nbsp; Reset checklist</button>
+      </section>
+      <section class="outfits" aria-labelledby="outfit-title">
+        <h2 id="outfit-title">Outfit Edit</h2>
+        <div id="looks"></div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
